@@ -7,6 +7,7 @@ node {
 
   stage ('run'){
     echo "HELLO!"
+    echo payload
     sh 'ls'
   }
 
@@ -19,3 +20,5 @@ node {
     sh "git rev-parse --abbrev-ref HEAD"
   }
 }
+
+    
