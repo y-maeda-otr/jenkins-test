@@ -19,10 +19,11 @@ node {
   }
 }
 
+// refered "https://github.com/doowb/typeof-github-event/blob/master/lib/event-map.js"
 def detectEventType(payload) {
     if(['pull_request', 'repository'].every { payload.hasProperty(it) }) { "PR" }
     else if(['ref', 'before', 'commits', 'repository']) { "Push" }
-    else { "•s–¾" }
+    else { "ä¸æ˜" }
 }
 
 def notifyGithubResult(payload) {
