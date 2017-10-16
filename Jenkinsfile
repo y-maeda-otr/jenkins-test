@@ -19,16 +19,33 @@ node {
   }
 }
 
+@NonCPS
+def parseJson(text) {
+    return new groovy.json.JsonSlurperClassic().parseText(text)
+}
+
 // refered "https://github.com/doowb/typeof-github-event/blob/master/lib/event-map.js"
-def detectEventType(payload) {
-    if(['pull_request', 'repository'].every { payload.hasProperty(it) }) { "PR" }
-    else if(['ref', 'before', 'commits', 'repository']) { "Push" }
+def createMessage(json) {
+    if(['pull_request', 'repository'].every { json."${it}" }) {
+        messageForPR(json)
+    }
+    else if(['ref', 'before', 'commits', 'repository'].every { json."${it}" }) { 
+        messageForPush(json)  
+    }
     else { "不明" }
 }
 
+def messageForPR(json){
+    "PR #${json.number} ${json.action} by ${json.sender.login} : ${json.pull_request.title}"
+}
+
+def messageForPush(json){
+    "Push ${json.ref} by ${json.sender.login} : ${json.head_commit.id}"
+}
+    
 def notifyGithubResult(payload) {
-    def eventType = detectEventType(payload)
-    def msg = "${eventType} by ${payload.sender.login} "
+    def json = parseJson(payload)
+    def msg = createMessage(json)
     //notifyToSlack(msg)
     echo msg
 }
