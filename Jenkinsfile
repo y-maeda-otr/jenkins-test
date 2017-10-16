@@ -19,6 +19,7 @@ node {
   }
 }
 
+
 @NonCPS
 def parseJson(text) {
     return new groovy.json.JsonSlurperClassic().parseText(text)
