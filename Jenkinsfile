@@ -30,7 +30,7 @@ def createMessage(json) {
     if(['pull_request', 'repository'].every { json."${it}" }) {
         messageForPR(json)
     }
-    else if(['ref', 'before', 'commits', 'repository'].every { json."${it}" }) { 
+    else if(['ref', 'before',/* 'commits', could be empty array */ 'repository'].every { json."${it}" }) { 
         messageForPush(json)  
     }
     else { "不明" }
@@ -47,8 +47,7 @@ def messageForPush(json){
 def notifyGithubResult(payload) {
     def json = parseJson(payload)
     def msg = createMessage(json)
-    //notifyToSlack(msg)
-    echo msg
+    notifyToSlack(msg)
 }
     
 def notifyToSlack(msg) {
