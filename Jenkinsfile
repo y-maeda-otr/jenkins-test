@@ -24,8 +24,10 @@ def parseJson(text) {
 def createMessage(json) {
     if(['pull_request', 'repository'].every { json."${it}" }) {
         switch(json.action){
-            case "opened":
+            case "opened": 
                 return messageForPR(json, "created")
+            case "reopened": 
+                return messageForPR(json, "reopened")
             case "closed":
                 return messageForPR(json, (json.pull_request?.merged ? "merged" : "closed"))
         }
@@ -67,7 +69,7 @@ def notifyToSlack(msg, link) {
     def slack_channel = "#patentoffice-lib"
     def slack_color = "good"
     def detail_link = link ? "(<${link}|Open>)" : ""
-    currentBuild.result == "SUCCESS"
+    currentBuild.result = "SUCCESS"
     if(currentBuild.result == "FAILURE") {
         slack_color = "danger"
     }
