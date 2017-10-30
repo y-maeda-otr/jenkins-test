@@ -83,12 +83,14 @@ def notifyToSlack(msg, link) {
 }
 
 def updateGithubStatus(){
-    withEnv(["STATUS=${isSuccessCurrently() ? "success" : "failure"}", "GITHUB_REPO=y-maeda-otr/jenkins-test"]){
-        withCredentials([string(credentialsId: 'github-token', variable: 'ACCESS_TOKEN')]) {
-    	     sh """GIT_COMMIT=\$(git rev-parse HEAD) curl "https://api.github.com/repos/${GITHUB_REPO}/statuses/$GIT_COMMIT?access_token=${ACCESS_TOKEN}"\
+    def githubRepo ="y-maeda-otr/jenkins-test"
+    def status = {isSuccessCurrently() ? "success" : "failure"}
+    
+    withCredentials([string(credentialsId: 'github-token', variable: 'accessToken')]) {
+    	     sh """GIT_COMMIT=\$(git rev-parse HEAD) curl "https://api.github.com/repos/${githubRepo}/statuses/\$GIT_COMMIT?access_token=${accessToken}"\
                    -H "Content-Type: application/json"\
                    -X POST\
-                   -d "{\"state\": \"$STATUS\", \"context\": "ci", \"description\": \"from Jenkins\"}" """
+                   -d "{\"state\": \"${status}\", \"context\": "ci", \"description\": \"from Jenkins\"}" """
         }
     }
 }
