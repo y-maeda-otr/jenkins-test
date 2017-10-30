@@ -1,5 +1,7 @@
 #! groovy
 
+currentBuild.result = "SUCCESS"
+
 node {
   stage ('Checkout'){
     checkout scm
@@ -11,6 +13,7 @@ node {
   }
 
   stage ('env'){
+    updateGithubStatus()
     notifyGithubResult(payload)
   }
 }
@@ -64,23 +67,28 @@ def notifyGithubResult(payload) {
         notifyToSlack(msg.message, msg.link)
     }
 }
+
+def isSuccessCurrently(){
+    currentBuild.result == "SUCCESS"
+}
     
 def notifyToSlack(msg, link) {
     def slack_channel = "#patentoffice-lib"
-    def slack_color = "good"
+    def slack_color = isSuccessCurrently() ? "good" : "danger"
     def detail_link = link ? "(<${link}|Open>)" : ""
-    currentBuild.result = "SUCCESS"
-    if(currentBuild.result == "FAILURE") {
-        slack_color = "danger"
-    }
+    
     def slack_msg = "job ${env.JOB_NAME}[No.${env.BUILD_NUMBER}] was builded ${currentBuild.result} ${detail_link}.\n\n ${msg}"
 //    slackSend channel: slack_channel, color: slack_color, message: slack_msg
-    echo "job ${env.JOB_NAME}[No.${env.BUILD_NUMBER}] was builded ${currentBuild.result}.\n\n ${msg} ${detail_link}"
+    echo "job ${env.JOB_NAME}[No.${env.BUILD_NUMBER}] was builded ${currentBuild.result}.\n${msg} ${detail_link}"
 }
 
-/*
-withCredentials([string(credentialsId: 'github-token', variable: 'githubToken')]) {
-	sh "echo ${githubToken} > a.txt"
-	sh "ls a.txt"
+def updateGithubStatus(){
+    withEnv(["STATUS=${isSuccessCurrently() ? "success" : "failure"}", "GITHUB_REPO=y-maeda-otr/jenkins-test"]){
+        withCredentials([string(credentialsId: 'github-token', variable: 'ACCESS_TOKEN')]) {
+    	     sh """GIT_COMMIT=$(git rev-parse HEAD) curl "https://api.github.com/repos/${GITHUB_REPO}/statuses/$GIT_COMMIT?access_token=${ACCESS_TOKEN}"\
+                   -H "Content-Type: application/json"\
+                   -X POST\
+                   -d "{\"state\": \"$STATUS\", \"context\": "ci", \"description\": \"from Jenkins\"}""""
+        }
+    }
 }
-*/
