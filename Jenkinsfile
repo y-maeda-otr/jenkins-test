@@ -84,7 +84,7 @@ def notifyToSlack(msg, link) {
 
 def updateGithubStatus(){
     def githubRepo ="y-maeda-otr/jenkins-test"
-    def status = {isSuccessCurrently() ? "success" : "failure"}
+    def status = isSuccessCurrently() ? "success" : "failure"
     
     withCredentials([string(credentialsId: 'github-token', variable: 'accessToken')]) {
         sh """GIT_COMMIT=\$(git rev-parse HEAD) curl "https://api.github.com/repos/${githubRepo}/statuses/\$GIT_COMMIT?access_token=${accessToken}"\
