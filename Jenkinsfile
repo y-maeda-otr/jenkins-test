@@ -87,9 +87,9 @@ def updateGithubStatus(){
     def status = isSuccessCurrently() ? "success" : "failure"
     
     withCredentials([string(credentialsId: 'github-token', variable: 'accessToken')]) {
-        sh """curl "https://api.github.com/repos/${githubRepo}/statuses/\$(git rev-parse HEAD)?access_token=${accessToken}"\
-             -H "Content-Type: application/json"\
+        sh """curl \"https://api.github.com/repos/${githubRepo}/statuses/\$(git rev-parse HEAD)?access_token=${accessToken}\"\
+             -H \"Content-Type: application/json\"\
              -X POST\
-             -d "{\"state\": \"${status}\", \"context\": "ci", \"description\": \"from Jenkins\"}" """
+             -d \"{\\\"state\\\": \\\"${status}\\\", \\\"context\\\": \\\"ci\\\", \\\"description\\\": \\\"from Jenkins\\\"}\" """
     }
 }
