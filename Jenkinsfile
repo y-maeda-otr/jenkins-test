@@ -88,7 +88,7 @@ def updateGithubStatus(){
     	     sh """GIT_COMMIT=\$(git rev-parse HEAD) curl "https://api.github.com/repos/${GITHUB_REPO}/statuses/$GIT_COMMIT?access_token=${ACCESS_TOKEN}"\
                    -H "Content-Type: application/json"\
                    -X POST\
-                   -d "{\"state\": \"$STATUS\", \"context\": "ci", \"description\": \"from Jenkins\"}""""
+                   -d "{\"state\": \"$STATUS\", \"context\": "ci", \"description\": \"from Jenkins\"}" """
         }
     }
 }
