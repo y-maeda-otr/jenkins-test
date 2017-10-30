@@ -1,26 +1,47 @@
 #! groovy
 
-currentBuild.result = "SUCCESS"
-
 node {
-  stage ('Checkout'){
-    checkout scm
-  }
+  try{
+    if(detectBuildBranch(payload)){
+      currentBuild.result = "SUCCESS"
+      stage ('Checkout'){
+        checkout scm
+	sh "git reset --hard ${detectBuildBranch(payload)}"
+      }
 
-  stage ('run'){
-    echo "HELLO!"
-    sh 'ls'
-  }
+      stage ('compile'){
+        sh 'ls'
+      }
+  
+      stage ('test'){
+        sh 'ls'
+      }
+      stage ('archive'){
+          archiveArtifacts artifacts: 'build/reports/tests/test'
+      }
+    }
+  }catch(ex){
+    currentBuild.result = "FAILURE"
+    throw new RuntimeException(ex)
+  }finally{
+    stage ('notify'){
+      notifyGithubResult(payload)
 
-  stage ('env'){
-    updateGithubStatus()
-    notifyGithubResult(payload)
+      if(detectBuildBranch(payload)){
+        updateGithubStatus()
+      }
+    }
   }
 }
 
 @NonCPS
 def parseJson(text) {
     return new groovy.json.JsonSlurperClassic().parseText(text)
+}
+
+@NonCPS
+def detectBuildBranch(payload){
+  parseJson(payload)?.after
 }
 
 // refered "https://github.com/doowb/typeof-github-event/blob/master/lib/event-map.js"
@@ -35,9 +56,7 @@ def createMessage(json) {
                 return messageForPR(json, (json.pull_request?.merged ? "merged" : "closed"))
         }
     }else if(['ref', 'before',/* 'commits', could be empty array */ 'repository'].every { json."${it}" }) { 
-        //messageForPush(json)
-        echo "would be push event"
-        null      
+        messageForPush(json)
     }else if(['comment', 'pull_request', 'repository'].every { json."${it}" }) {
         //messageForPRComment(json)
         echo "would be comment event"
@@ -51,7 +70,9 @@ def messageForPR(json, status){
 }
 
 def messageForPush(json){
-    [message: "Push ${json.ref} by ${json.sender.login} : ${json.head_commit.id}"
+    def jenkinsLink = isSuccessCurrently() ? "" : "<${env.BUILD_URL}console|Jenkins>"
+
+    [message: "Push ${json.ref} by ${json.sender.login} : ${json.head_commit.id} (${currentBuild.result}${jenkinsLink})"
     ,link: json.pull_request?.url]
 }
 
@@ -75,16 +96,16 @@ def isSuccessCurrently(){
 def notifyToSlack(msg, link) {
     def slack_channel = "#patentoffice-lib"
     def slack_color = isSuccessCurrently() ? "good" : "danger"
-    def detail_link = link ? "(<${link}|Open>)" : ""
+    def detail_link = link ? "(<${link}|Github>)" : ""
     
-    def slack_msg = "job ${env.JOB_NAME}[No.${env.BUILD_NUMBER}] was builded ${currentBuild.result} ${detail_link}.\n\n ${msg}"
-//    slackSend channel: slack_channel, color: slack_color, message: slack_msg
-    echo "job ${env.JOB_NAME}[No.${env.BUILD_NUMBER}] was builded ${currentBuild.result}.\n${msg} ${detail_link}"
+    def slack_msg = "job ${env.JOB_NAME}[No.${env.BUILD_NUMBER}] was builded${detail_link}.\n${msg}"
+    echo slack_msg
+    //slackSend channel: slack_channel, color: slack_color, message: slack_msg
 }
 
 def updateGithubStatus(){
-    def githubRepo ="y-maeda-otr/jenkins-test"
-    def status = isSuccessCurrently() ? "success" : "failure"
+   def githubRepo ="y-maeda-otr/jenkins-test"
+   def status = isSuccessCurrently() ? "success" : "failure"
     
     withCredentials([string(credentialsId: 'github-token', variable: 'accessToken')]) {
         sh """curl \"https://api.github.com/repos/${githubRepo}/statuses/\$(git rev-parse HEAD)?access_token=${accessToken}\"\
