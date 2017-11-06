@@ -43,7 +43,7 @@ def parseJson(text) {
 def message(){
     def jenkinsLink = "<${env.BUILD_URL}console|${currentBuild.result}>"
     
-    "’èŠúƒrƒ‹ƒh [BuildNo.${env.BUILD_NUMBER}] (${jenkinsLink})"
+    "å®šæœŸãƒ“ãƒ«ãƒ‰ [BuildNo.${env.BUILD_NUMBER}] (${jenkinsLink})"
 }
 
 def notifyGithubResult() {
