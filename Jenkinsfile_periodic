@@ -4,38 +4,32 @@ properties([pipelineTriggers([cron('H/5 23 * * *')])])
 
 node {
   currentBuild.result = "SUCCESS"
+  try{
+    stage ('Checkout'){
+      checkout scm
+    }
+   stage ('compile'){
+      sh './gradlew compileTestGroovy'
+    }
     try{
-      stage ('Checkout'){
-        checkout scm
+      stage ('test'){
+        sh './gradlew test'
       }
-
-      stage ('compile'){
-        sh './gradlew compileTestGroovy'
-      }
-      try{
-        stage ('test'){
-          sh './gradlew test'
-        }
-      }finally{
-        stage ('archive'){
-          junit allowEmptyResults: true, keepLongStdio: true, testResults: 'build/test-results/test/*.xml'
-        }
-      }
-    }catch(ex){
-      currentBuild.result = "FAILURE"
-      throw new RuntimeException(ex)
     }finally{
-      stage ('notify'){
-        notifyGithubResult(payload)
-      }
-      stage ('cleanup'){
-        // old files could be caused failure of junit report
-        cleanWs cleanWhenAborted: false, cleanWhenNotBuilt: false, cleanWhenUnstable: false
+      stage ('archive'){
+        junit allowEmptyResults: true, keepLongStdio: true, testResults: 'build/test-results/test/*.xml'
       }
     }
-  }else{
-    stage ('Checkout'){
-      echo 'manipulate by GitHub or no branch detected.'
+  }catch(ex){
+    currentBuild.result = "FAILURE"
+    throw new RuntimeException(ex)
+  }finally{
+    stage ('notify'){
+      notifyGithubResult(payload)
+    }
+    stage ('cleanup'){
+      // old files could be caused failure of junit report
+      cleanWs cleanWhenAborted: false, cleanWhenNotBuilt: false, cleanWhenUnstable: false
     }
   }
 }
