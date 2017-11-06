@@ -1,6 +1,6 @@
 #! groovy
 
-properties([pipelineTriggers([cron('H/5 * * * *')])])
+properties([pipelineTriggers([cron('H 8 * * 1-6'), cron('H 23 * * 0-5')])]) // JSTで月-土の8時と12時に実行
 
 node {
   currentBuild.result = "SUCCESS"
@@ -13,7 +13,15 @@ node {
     }
     try{
       stage ('test'){
-        sh './gradlew test'
+        sh './gradlew integrationTest || true'
+	testResult = sh(
+	  script: 'grep -oP \'<div class="counter">\\\K[\\\d\\\.]+\' build/reports/tests/integrationTest/index.html\'',
+	  returnStdout: true
+	).split("\n")
+
+	if(testResult[1].toInteger() > 0){
+	  currentBuild.result = "FAILURE"
+	}
       }
     }finally{
       stage ('archive'){
@@ -25,7 +33,8 @@ node {
     throw new RuntimeException(ex)
   }finally{
     stage ('notify'){
-      notifyGithubResult()
+      def testMessage = "total:${testResult[0]} failure:${testResult[1]} ignored:${testResult[2]} duration:${testResult[3]}"
+      notifyGithubResult(testMessage)
     }
     stage ('cleanup'){
       // old files could be caused failure of junit report
@@ -40,14 +49,14 @@ def parseJson(text) {
 }
 
 @NonCPS
-def message(){
+def createMessage(msg){
     def jenkinsLink = "<${env.BUILD_URL}console|${currentBuild.result}>"
     
-    "定期ビルド [BuildNo.${env.BUILD_NUMBER}] (${jenkinsLink})"
+    "定期ビルド [BuildNo.${env.BUILD_NUMBER}] ${jenkinsLink} (${msg})"
 }
 
-def notifyGithubResult() {
-    def msg = message()
+def notifyGithubResult(message) {
+    def msg = createMessage(message)
 
     if(msg){	
         notifyToSlack(msg)
