@@ -1,8 +1,8 @@
 #! groovy
 
-load "${pwd()}@script/common.groovy"
-
 node {
+  load "${pwd()}@script/common.groovy"
+
   try{
     if(detectBuildBranch(payload)){
       currentBuild.result = "SUCCESS"

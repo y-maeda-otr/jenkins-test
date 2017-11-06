@@ -2,3 +2,4 @@
 def isSuccessCurrently(){
     currentBuild.result == "SUCCESS"
 }
+
