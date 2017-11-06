@@ -1,0 +1,74 @@
+#! groovy
+
+properties([pipelineTriggers([cron('H/5 23 * * *')])])
+
+node {
+  currentBuild.result = "SUCCESS"
+    try{
+      stage ('Checkout'){
+        checkout scm
+      }
+
+      stage ('compile'){
+        sh './gradlew compileTestGroovy'
+      }
+      try{
+        stage ('test'){
+          sh './gradlew test'
+        }
+      }finally{
+        stage ('archive'){
+          junit allowEmptyResults: true, keepLongStdio: true, testResults: 'build/test-results/test/*.xml'
+        }
+      }
+    }catch(ex){
+      currentBuild.result = "FAILURE"
+      throw new RuntimeException(ex)
+    }finally{
+      stage ('notify'){
+        notifyGithubResult(payload)
+      }
+      stage ('cleanup'){
+        // old files could be caused failure of junit report
+        cleanWs cleanWhenAborted: false, cleanWhenNotBuilt: false, cleanWhenUnstable: false
+      }
+    }
+  }else{
+    stage ('Checkout'){
+      echo 'manipulate by GitHub or no branch detected.'
+    }
+  }
+}
+
+@NonCPS
+def parseJson(text) {
+  new groovy.json.JsonSlurperClassic().parseText(text)
+}
+
+@NonCPS
+def message(){
+    def jenkinsLink = "<${env.BUILD_URL}console|${currentBuild.result}>"
+    def shortenHash = json?.head_commit?.id?.substring(0, 10)
+    "’èŠúƒrƒ‹ƒh [BuildNo.${env.BUILD_NUMBER}] ${shortenHash} (${jenkinsLink})"
+}
+
+def notifyGithubResult(payload) {
+    def json = parseJson(payload)
+    def msg = message()
+
+    if(msg){	
+        notifyToSlack(msg)
+    }
+}
+
+def isSuccessCurrently(){
+    currentBuild.result == "SUCCESS"
+}
+    
+def notifyToSlack(msg) {
+    def slack_channel = "#patentoffice-lib"
+    def slack_color = isSuccessCurrently() ? "good" : "danger"
+    
+    echo msg
+    //slackSend channel: slack_channel, color: slack_color, message: msg
+}
