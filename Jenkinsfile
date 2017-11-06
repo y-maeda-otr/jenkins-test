@@ -1,6 +1,6 @@
 #! groovy
 
-load "${workspace}@script/common.groovy"
+load "${pwd()}@script/common.groovy"
 
 node {
   try{
