@@ -3,7 +3,7 @@
 properties([
   pipelineTriggers([
     // JSTで月-土の8時と12時に実行
-    cron('H 9 * * 1-6'), cron('H 23 * * 0-5')
+    cron('H 9 * * 1-6')
   ])
 ]) 
 
