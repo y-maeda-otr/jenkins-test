@@ -1,6 +1,11 @@
 #! groovy
 
-properties([pipelineTriggers([cron('H 8 * * 1-6'), cron('H 23 * * 0-5')])]) // JSTで月-土の8時と12時に実行
+properties([
+  pipelineTriggers([
+    // JSTで月-土の8時と12時に実行
+    cron('H 8 * * 1-6'), cron('H 23 * * 0-5')
+  ])
+]) 
 
 node {
   currentBuild.result = "SUCCESS"
@@ -15,7 +20,7 @@ node {
       stage ('test'){
         sh './gradlew integrationTest || true'
 	testResult = sh(
-	  script: 'grep -oP \'<div class="counter">\\K[\\d\\.]+\' build/reports/tests/integrationTest/index.html',
+	  script: 'grep -oP \'<div class="counter">\\K[^<]+\' build/reports/tests/integrationTest/index.html',
 	  returnStdout: true
 	).split("\n")
 
