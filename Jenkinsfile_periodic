@@ -42,8 +42,8 @@ def parseJson(text) {
 @NonCPS
 def message(){
     def jenkinsLink = "<${env.BUILD_URL}console|${currentBuild.result}>"
-    def shortenHash = json?.head_commit?.id?.substring(0, 10)
-    "定期ビルド [BuildNo.${env.BUILD_NUMBER}] ${shortenHash} (${jenkinsLink})"
+    
+    "定期ビルド [BuildNo.${env.BUILD_NUMBER}] (${jenkinsLink})"
 }
 
 def notifyGithubResult() {
