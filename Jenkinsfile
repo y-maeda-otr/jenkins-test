@@ -1,5 +1,7 @@
 #! groovy
 
+load "${workspace}@script/common.groovy"
+
 node {
   try{
     if(detectBuildBranch(payload)){
@@ -88,11 +90,7 @@ def notifyGithubResult(payload) {
         notifyToSlack(msg.message, msg.link)
     }
 }
-
-def isSuccessCurrently(){
-    currentBuild.result == "SUCCESS"
-}
-    
+   
 def notifyToSlack(msg, link) {
     def slack_channel = "#patentoffice-lib"
     def slack_color = isSuccessCurrently() ? "good" : "danger"
