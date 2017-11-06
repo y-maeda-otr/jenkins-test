@@ -25,7 +25,7 @@ node {
     throw new RuntimeException(ex)
   }finally{
     stage ('notify'){
-      notifyGithubResult(payload)
+      notifyGithubResult()
     }
     stage ('cleanup'){
       // old files could be caused failure of junit report
@@ -46,8 +46,7 @@ def message(){
     "’èŠúƒrƒ‹ƒh [BuildNo.${env.BUILD_NUMBER}] ${shortenHash} (${jenkinsLink})"
 }
 
-def notifyGithubResult(payload) {
-    def json = parseJson(payload)
+def notifyGithubResult() {
     def msg = message()
 
     if(msg){	
