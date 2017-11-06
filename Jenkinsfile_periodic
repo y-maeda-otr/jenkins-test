@@ -1,6 +1,6 @@
 #! groovy
 
-properties([pipelineTriggers([cron('H/5 23 * * *')])])
+properties([pipelineTriggers([cron('H/5 * * * *')])])
 
 node {
   currentBuild.result = "SUCCESS"
