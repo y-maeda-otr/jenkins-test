@@ -2,18 +2,18 @@
 
 @NonCPS
 def common(){
-  load "${pwd()}@script/script/common.groovy"
+  load "${pwd()}@script/jenkins/common.groovy"
 }
 
 node {
-
+  targetBranch = detectBuildBranch(payload)
   try{
-    if(detectBuildBranch(payload)){
+    if(targetBranch){
       currentBuild.result = "SUCCESS"
       stage ('Checkout'){
         checkout scm
 	sh "git reset --hard ${detectBuildBranch(payload)}"
-	echo "ok?: ${common().isSuccessCurrently()}"
+	common().echoPayload()
       }
 
       stage ('compile'){
