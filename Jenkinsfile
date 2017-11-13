@@ -1,5 +1,10 @@
 #! groovy
 
+@NonCPS
+def common(){
+  load "${pwd()}@script/script/common.groovy"
+}
+
 node {
 
   try{
@@ -8,14 +13,12 @@ node {
       stage ('Checkout'){
         checkout scm
 	sh "git reset --hard ${detectBuildBranch(payload)}"
-	common = load "${pwd()}@script/script/common.groovy"
-
-	echo common.isSuccessCurrently()
+	echo "ok?: ${common().isSuccessCurrently()}"
       }
 
       stage ('compile'){
         sh 'ls'
-	echo common.isSuccessCurrently()
+	echo "ok?: ${common().isSuccessCurrently()}"
       }
   
       stage ('test'){
@@ -75,7 +78,7 @@ def messageForPR(json, status){
 }
 
 def messageForPush(json){
-    def jenkinsLink = isSuccessCurrently() ? "" : "<${env.BUILD_URL}console|Jenkins>"
+    def jenkinsLink = common().isSuccessCurrently() ? "" : "<${env.BUILD_URL}console|Jenkins>"
 
     [message: "Push ${json.ref} by ${json.sender.login} : ${json.head_commit.id} (${currentBuild.result}${jenkinsLink})"
     ,link: json.pull_request?.url]
