@@ -8,7 +8,7 @@ node {
       stage ('Checkout'){
         checkout scm
 	sh "git reset --hard ${detectBuildBranch(payload)}"
-	common = load "${pwd()}@script/common.groovy"
+	common = load "${pwd()}@script/script/common.groovy"
 
 	echo common.isSuccessCurrently()
       }
