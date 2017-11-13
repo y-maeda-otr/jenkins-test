@@ -1,7 +1,6 @@
 #! groovy
 
 node {
-  load "${pwd()}@script/common.groovy"
 
   try{
     if(detectBuildBranch(payload)){
@@ -9,10 +8,14 @@ node {
       stage ('Checkout'){
         checkout scm
 	sh "git reset --hard ${detectBuildBranch(payload)}"
+	common = load "${pwd()}@script/common.groovy"
+
+	echo common.isSuccessCurrently()
       }
 
       stage ('compile'){
         sh 'ls'
+	echo common.isSuccessCurrently()
       }
   
       stage ('test'){
