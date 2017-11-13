@@ -93,7 +93,8 @@ def notifyGithubResult(payload) {
         notifyToSlack(msg.message, msg.link)
     }
 }
-@cps
+
+@NonCPS
 def isSuccessCurrently(){
     return false
 }
