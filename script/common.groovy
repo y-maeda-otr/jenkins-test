@@ -1,5 +1,5 @@
 def isSuccessCurrently(){
-    currentBuild.result == "SUCCESS"
+    "${currentBuild.result == "SUCCESS"}"
 }
 
 return this
