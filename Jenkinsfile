@@ -75,7 +75,7 @@ def messageForPR(json, status){
 }
 
 def messageForPush(json){
-    def jenkinsLink = common.isSuccessCurrently() ? "" : "<${env.BUILD_URL}console|Jenkins>"
+    def jenkinsLink = isSuccessCurrently() ? "" : "<${env.BUILD_URL}console|Jenkins>"
 
     [message: "Push ${json.ref} by ${json.sender.login} : ${json.head_commit.id} (${currentBuild.result}${jenkinsLink})"
     ,link: json.pull_request?.url]
@@ -93,10 +93,14 @@ def notifyGithubResult(payload) {
         notifyToSlack(msg.message, msg.link)
     }
 }
-   
+@cps
+def isSuccessCurrently(){
+    return false
+}
+
 def notifyToSlack(msg, link) {
     def slack_channel = "#patentoffice-lib"
-    def slack_color = common.isSuccessCurrently() ? "good" : "danger"
+    def slack_color = isSuccessCurrently() ? "good" : "danger"
     def detail_link = link ? "(<${link}|Github>)" : ""
     
     def slack_msg = "job ${env.JOB_NAME}[No.${env.BUILD_NUMBER}] was builded${detail_link}.\n${msg}"
@@ -106,7 +110,7 @@ def notifyToSlack(msg, link) {
 
 def updateGithubStatus(){
    def githubRepo ="y-maeda-otr/jenkins-test"
-   def status = common.isSuccessCurrently() ? "success" : "failure"
+   def status = isSuccessCurrently() ? "success" : "failure"
     
     withCredentials([string(credentialsId: 'github-token', variable: 'accessToken')]) {
         sh """curl \"https://api.github.com/repos/${githubRepo}/statuses/\$(git rev-parse HEAD)?access_token=${accessToken}\"\
