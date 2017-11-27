@@ -2,7 +2,7 @@
 
 @NonCPS
 def common(){
-  load "${pwd()}@script/jenkins/common.groovy"
+  load "jenkins/common.groovy"
 }
 
 node {
@@ -22,7 +22,8 @@ node {
       }
   
       stage ('test'){
-        sh 'ls'
+        def msg = load "jenkins/parse_test_result.groovy"
+	echo msg
       }
       stage ('archive'){
           archiveArtifacts artifacts: 'build/reports/tests/test'

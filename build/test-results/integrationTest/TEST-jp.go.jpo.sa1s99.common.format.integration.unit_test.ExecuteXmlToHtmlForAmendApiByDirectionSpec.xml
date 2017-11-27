@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jp.go.jpo.sa1s99.common.format.integration.unit_test.ExecuteXmlToHtmlForAmendApiByDirectionSpec" tests="1" skipped="0" failures="1" errors="0" timestamp="2017-11-27T02:55:40" hostname="dxxx-002" time="0.0">
+  <properties/>
+  <testcase name="execute" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.ExecuteXmlToHtmlForAmendApiByDirectionSpec" time="0.0">
+    <failure message="java.lang.IllegalArgumentException: Not implemented yet" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: Not implemented yet
+	at jp.go.jpo.sa1s99.common.format.api.XmlToHtmlForAmendApi.execute(XmlToHtmlForAmendApi.java:32)
+	at jp.go.jpo.sa1s99.common.format.integration.ExecuteXmlToHtmlForAmendApiByDirection.executeApi(ExecuteXmlToHtmlForAmendApiByDirection.java:26)
+	at jp.go.jpo.sa1s99.common.format.integration.ExecuteXmlToHtmlForAmendApiByDirection.executeApi(ExecuteXmlToHtmlForAmendApiByDirection.java:13)
+	at jp.go.jpo.sa1s99.common.format.integration.ExecuteApiByDirection.execute(ExecuteApiByDirection.java:28)
+	at jp.go.jpo.sa1s99.common.format.integration.unit_test.ExecuteXmlToHtmlForAmendApiByDirectionSpec.execute(ExecuteXmlToHtmlForAmendApiByDirectionSpec.groovy:26)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

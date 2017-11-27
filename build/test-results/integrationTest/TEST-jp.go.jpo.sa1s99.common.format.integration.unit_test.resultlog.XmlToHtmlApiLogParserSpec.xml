@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" tests="10" skipped="0" failures="0" errors="0" timestamp="2017-11-27T02:55:40" hostname="dxxx-002" time="0.346">
+  <properties/>
+  <testcase name="[HTMLinfo Structure]が存在しない" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" time="0.0"/>
+  <testcase name="ひとつの[HTMLinfo Structure]" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" time="0.0"/>
+  <testcase name="HTMLinfo Structureが３つ" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" time="0.016"/>
+  <testcase name="HTMLInfoとTocInfoを保持する" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" time="0.015"/>
+  <testcase name="AmendDataとHTMLInfoを保持する" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" time="0.0"/>
+  <testcase name="directionが複数" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" time="0.016"/>
+  <testcase name="テスト用のログファイルを読み込む 1" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" time="0.031"/>
+  <testcase name="テスト用のログファイルを読み込む 2" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" time="0.022"/>
+  <testcase name="テスト用のログファイルを読み込む 3" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" time="0.229"/>
+  <testcase name="テスト用のログファイルを読み込む 4" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.XmlToHtmlApiLogParserSpec" time="0.017"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

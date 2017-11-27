@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jp.go.jpo.sa1s99.common.format.integration.unit_test.ExecuteXmlToHtmlApiByDirectionSpec" tests="1" skipped="0" failures="1" errors="0" timestamp="2017-11-27T02:55:39" hostname="dxxx-002" time="0.137">
+  <properties/>
+  <testcase name="execute" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.ExecuteXmlToHtmlApiByDirectionSpec" time="0.137">
+    <failure message="Condition not satisfied:&#10;&#10;result != null&#10;|      |&#10;null   false&#10;" type="org.spockframework.runtime.ConditionNotSatisfiedError">Condition not satisfied:
+
+result != null
+|      |
+null   false
+
+	at jp.go.jpo.sa1s99.common.format.integration.unit_test.ExecuteXmlToHtmlApiByDirectionSpec.execute(ExecuteXmlToHtmlApiByDirectionSpec.groovy:32)
+</failure>
+  </testcase>
+  <system-out><![CDATA[[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=50, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=50, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.091][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.106][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.107][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.107][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.108][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.108][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.108][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.109][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=48, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+[2017/55/27 11:55:40.109][Test worker] DEBUG j.g.j.s.c.f.l.collector.CellCounter#tailEmptyLines-114 - CellCounter{row=16, column=0, maxRow=50, maxColumn=40, pageNumberLineWidth=0}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.LogicalStructureLogParserSpec" tests="7" skipped="0" failures="0" errors="0" timestamp="2017-11-27T02:55:40" hostname="dxxx-002" time="0.101">
+  <properties/>
+  <testcase name="[LogicalData]が存在しない" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.LogicalStructureLogParserSpec" time="0.016"/>
+  <testcase name="ひとつの[LogicalData Structure]" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.LogicalStructureLogParserSpec" time="0.0"/>
+  <testcase name="値にNULLを含む" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.LogicalStructureLogParserSpec" time="0.016"/>
+  <testcase name="LogicalData Structureが３つ" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.LogicalStructureLogParserSpec" time="0.0"/>
+  <testcase name="directionが複数" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.LogicalStructureLogParserSpec" time="0.0"/>
+  <testcase name="テスト用のログファイルを読み込む 1" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.LogicalStructureLogParserSpec" time="0.031"/>
+  <testcase name="テスト用のログファイルを読み込む 2" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.resultlog.LogicalStructureLogParserSpec" time="0.038"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

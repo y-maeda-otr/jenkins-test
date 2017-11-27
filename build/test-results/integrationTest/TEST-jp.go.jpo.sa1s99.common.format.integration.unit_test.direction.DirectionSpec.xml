@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionSpec" tests="5" skipped="0" failures="0" errors="0" timestamp="2017-11-27T02:55:39" hostname="dxxx-002" time="0.016">
+  <properties/>
+  <testcase name="application" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionSpec" time="0.0"/>
+  <testcase name="law" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionSpec" time="0.016"/>
+  <testcase name="pageDivision" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionSpec" time="0.0"/>
+  <testcase name="isAddTable" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionSpec" time="0.0"/>
+  <testcase name="isAddPdf" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionSpec" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionParserSpec" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-11-27T02:55:39" hostname="dxxx-002" time="0.085">
+  <properties/>
+  <testcase name="指示書を読み込んでキーと値の組み合わせを返す(1セット)" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionParserSpec" time="0.038"/>
+  <testcase name="指示書を読み込んでキーと値の組み合わせを返す(複数セット)" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionParserSpec" time="0.047"/>
+  <testcase name="イレギュラーな指示ファイルでも読み込める" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionParserSpec" time="0.0"/>
+  <testcase name="改行がCRLFでも読める" classname="jp.go.jpo.sa1s99.common.format.integration.unit_test.direction.DirectionParserSpec" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
