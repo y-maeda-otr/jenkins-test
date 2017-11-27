@@ -22,7 +22,9 @@ node {
       }
   
       stage ('test'){
-        def msg = load "jenkins/parse_test_result.groovy"
+        def module = load "jenkins/parse_test_result.groovy"
+	def basePath = sh "pwd"
+	def msg = module.parse(basePath)
 	echo msg
       }
       stage ('archive'){
