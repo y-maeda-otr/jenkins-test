@@ -22,8 +22,8 @@ node {
       }
   
       stage ('test'){
-	def msg = sh(script: "java -jar ${pwd()}/../war/WEB-INF/lib/groovy-all-2.4.7.jar jenkins/parse_test_result.groovy", returnStdout: true)
-	echo msg
+	parseResultMessage = sh(script: "java -jar ${pwd()}/../../war/WEB-INF/lib/groovy-all-2.4.7.jar jenkins/parse_test_result.groovy", returnStdout: true)
+	echo parseResultMessage
       }
       stage ('archive'){
           archiveArtifacts artifacts: 'build/reports/tests/test'
@@ -93,8 +93,8 @@ def notifyGithubResult(payload) {
     def json = parseJson(payload)
     def msg = createMessage(json)
 
-    if(msg){	
-        notifyToSlack(msg.message, msg.link)
+    if(msg){
+        notifyToSlack(msg.message + "\n" +  + (parseResultMessage ?: " [no test result]"), msg.link)
     }
 }
 
